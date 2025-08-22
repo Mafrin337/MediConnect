@@ -19,7 +19,6 @@ export default function SignupForm() {
         password: e.target.password.value,
       }),
     });
-
     const data = await res.json();
     setLoading(false);
 
