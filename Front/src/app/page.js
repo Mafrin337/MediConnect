@@ -1,13 +1,14 @@
 "use client"
 import Link from 'next/link';
 import {useState, useRef} from "react";
+import { useRouter } from "next/navigation";
 import {Phone,Mail} from "lucide-react";
 import InviewFade from './_Useful/InviewFade';
 export default function Home() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
    const featuresRef = useRef(null);
   const contactRef = useRef(null);
-
   const scrollTo = (ref) => {
     ref?.current?.scrollIntoView({ behavior: "smooth" });
     setIsOpen(false); 
@@ -39,18 +40,19 @@ export default function Home() {
               >
                 Contact Us
               </button>
-              <Link
-                href="/auth/login"
-                className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-              >
-                Login
-              </Link>
-              <Link
-                href="/auth/register"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Sign Up
-              </Link>
+                <button
+                  onClick={() => router.push("/auth/signin")}
+                  className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                >
+                  Login
+                </button>
+
+                <button
+                  onClick={() => router.push("/auth/register")}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Sign Up
+                </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -80,53 +82,56 @@ export default function Home() {
             >
               Contact Us
             </button>
-            <Link
-              href="/auth/login"
-              className="block px-4 py-2 text-blue-600 hover:bg-blue-50"
-              onClick={() => setIsOpen(false)}
-            >
-              Login
-            </Link>
-            <Link
-              href="/auth/register"
-              className="block px-4 py-2 text-blue-600 hover:bg-blue-50"
-              onClick={() => setIsOpen(false)}
-            >
-              Sign Up
-            </Link>
+              <button
+                  onClick={() => router.push("/auth/signin")}
+                  className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                >
+                  Login
+                </button>
+
+                <button
+                  onClick={() => router.push("/auth/register")}
+                  className="px-4 py-2 bg-[#5f6FFF] text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Sign Up
+                </button>
           </div>
         )}
       </nav>
-
       {/* Hero Section */}
-      <section className="h-screen flex flex-col justify-center items-center text-center px-4 max-w-4xl mx-auto">
-         <div className="absolute inset-0">
-          <img src="/2.jpg" className="w-full h-full object-cover opacity-20" />
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-          <InviewFade>
-          <span className="block md:inline whitespace-normal md:whitespace-nowrap">
-          Welcome to <span className="text-blue-600">MediConnect</span>
-        </span>
-        </InviewFade>
-        </h1>
-        <InviewFade del={6}>
-        <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-          Connect with verified doctors for online consultations, get digital prescriptions, 
-          and order medicines - all from the comfort of your home.
-        </p>
-        </InviewFade>
-        <InviewFade del={12}>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-md">
-            Find a Doctor
-          </button>
-          <button className="border border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-medium hover:bg-blue-50 transition-colors">
-            Learn How It Works
-          </button>
-        </div>
-        </InviewFade>
-      </section>
+        <section className="h-screen flex flex-col justify-center items-center px-4">
+  <div
+    className="flex flex-col md:flex-row items-center rounded-lg w-full max-w-6xl mx-auto 
+               bg-[#5f6FFF] bg-center bg-no-repeat bg-cover md:bg-contain"
+  >
+    {/* Left Side */}
+    <div className="md:w-1/2 flex flex-col items-start justify-center gap-4 py-12 md:py-20 px-6 md:px-12 text-center md:text-left">
+      <p className="text-3xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight">
+        Welcome to <br /> Mediconnect
+      </p>
+      <p className="text-white text-sm font-light">
+        Simply browse through our extensive list of trusted doctors, <br className="hidden sm:block" />
+        schedule your appointment hassle-free.
+      </p>
+      <a
+        href="#speciality"
+        className="flex items-center gap-2 bg-white px-8 py-3 rounded-full text-gray-600 text-sm mx-auto md:mx-0 hover:scale-105 transition-all duration-300"
+      >
+        Book Appointment
+      </a>
+    </div>
+
+    {/* Right Side (Image visible on all screens) */}
+<div className="md:w-1/2 flex justify-center items-center p-6">
+  <img
+    className="w-full h-auto rounded-lg object-contain"
+    src="./bg.png"
+    alt="Doctor consultation"
+  />
+</div>
+
+  </div>
+</section>
 
       {/* Features Grid */}
       <section ref = {featuresRef} className="py-16 px-4 bg-white">
@@ -193,7 +198,7 @@ export default function Home() {
        
       </section>
       {/* Call to Action */}
-      <section className="py-20 px-4 bg-blue-600 text-white text-center">
+      <section className="py-20 px-4 bg-[#5f6FFF] text-white text-center">
         <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
         <p className="text-xl mb-8 max-w-2xl mx-auto">
           Join thousands of patients and doctors who trust MediConnect for their healthcare needs.
